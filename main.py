@@ -1,142 +1,141 @@
-def find_student(students, roll_number):
+students=[]
+def add_student():
+    name=input("Enter the student name:")
+    section=input("Enter the section and class:")
+    roll_number=input("Enter the roll no:")
+
     for student in students:
-        if student["roll_number"] == roll_number:
-            return student
-    return None
+        if student["name"]==name:
+            print("Already name exist")
+            return
 
+        if student["roll_number"]==roll_number:
+            print("Roll number exist")
+            return
 
-def read_marks(prompt="Marks (0-100): "):
-    while True:
-        try:
-            marks = float(input(prompt))
-        except ValueError:
-            print("Enter a valid number.")
-            continue
-
-        if 0 <= marks <= 100:
-            return marks
-        print("Marks must be between 0 and 100.")
-
-
-def add_student(students):
-    name = input("Student name: ").strip()
-    roll_number = input("Roll number: ").strip()
-
-    if not name or not roll_number:
-        print("Name and roll number are required.")
-        return
-    if find_student(students, roll_number):
-        print("A student with that roll number already exists.")
+    # Now allocate marks (0 to 100)
+    marks=float(input("Enter the marks 0->100: "))
+    if marks < 0 or marks > 100:
+        print("Marks should be 0 to 100!")
         return
 
-    students.append({
-        "name": name,
-        "roll_number": roll_number,
-        "marks": read_marks(),
-    })
-    print("Student added successfully.")
-
-
-def view_students(students):
-    if not students:
-        print("No students registered.")
-        return
-
-    print("\nRegistered students")
-    for student in students:
-        print(
-            "Name: {name} | Roll number: {roll_number} | Marks: {marks:g}".format(
-                **student
-            )
-        )
-
-
-def search_student(students):
-    roll_number = input("Roll number to search: ").strip()
-    student = find_student(students, roll_number)
-    if student is None:
-        print("Student not found.")
-        return
-
-    print(
-        "Name: {name} | Roll number: {roll_number} | Marks: {marks:g}".format(
-            **student
-        )
-    )
-
-
-def update_marks(students):
-    roll_number = input("Roll number to update: ").strip()
-    student = find_student(students, roll_number)
-    if student is None:
-        print("Student not found.")
-        return
-
-    student["marks"] = read_marks()
-    print("Marks updated successfully.")
-
-
-def delete_student(students):
-    roll_number = input("Roll number to delete: ").strip()
-    student = find_student(students, roll_number)
-    if student is None:
-        print("Student not found.")
-        return
-
-    students.remove(student)
-    print("Student deleted successfully.")
-
-
-def show_average(students):
-    if not students:
-        print("No students registered.")
-        return
-
-    average = sum(student["marks"] for student in students) / len(students)
-    print("Average marks: {:g}".format(average))
-
-
-def show_highest_scorer(students):
-    if not students:
-        print("No students registered.")
-        return
-
-    highest = max(students, key=lambda student: student["marks"])
-    print(
-        "Highest scorer: {name} | Roll number: {roll_number} | Marks: {marks:g}".format(
-            **highest
-        )
-    )
-
-
-def main():
-    students = []
-    actions = {
-        "1": ("Add student", add_student),
-        "2": ("View all students", view_students),
-        "3": ("Search by roll number", search_student),
-        "4": ("Update marks", update_marks),
-        "5": ("Delete student", delete_student),
-        "6": ("Calculate average marks", show_average),
-        "7": ("Display highest scorer", show_highest_scorer),
+    student={
+        "name":name,
+        "roll_number":roll_number,
+        "section":section,
+        "marks":marks
     }
 
-    while True:
-        print("\nStudent Management System")
-        for number, (label, _) in actions.items():
-            print("{}. {}".format(number, label))
-        print("8. Exit")
+    students.append(student)
+    print("Student Added successfully")
+    
+def view_students():
+    if not students:
+        print("Not added student")
+        return
+    print("\n=======STUDENT MANAGEMENT SYSTEM=====")
+    for student in students:
+        print("Name:",student["name"])
+        print("Roll_no:",student["roll_number"])
+        print("Section:",student["section"])
+        print("Marks:",student["marks"])
 
-        choice = input("Choose an option: ").strip()
-        if choice == "8":
-            print("Goodbye.")
+
+def search_student():
+    roll_number=input("Enter the roll number:")
+
+    for student in students:
+        if student["roll_number"]==roll_number:
+            print("Name:",student["name"])
+            print("Rollno:",student["roll_number"])
+            print("Section:",student["section"])
+            print("Marks:",student["marks"])
             return
-        action = actions.get(choice)
-        if action is None:
-            print("Invalid option. Choose a number from 1 to 8.")
-            continue
-        action[1](students)
+
+    print("Student data not found")
 
 
-if __name__ == "__main__":
-    main()
+def update_marks():
+    roll_no=input("Enter the roll number:")
+
+    for student in students:
+        if student["roll_number"]==roll_no:
+            marks=float(input("Enter the marks:"))
+
+            if marks < 0 or marks > 100:
+                print("Mark should be 0 to 100")
+                return
+
+            student["marks"]=marks
+            print("Marks added successfully")
+            return
+
+    print("Student not found!")
+
+
+def delete_student():
+    roll_no=input("Enter the roll number:")
+
+    for student in students:
+        if student["roll_number"]==roll_no:
+            students.remove(student)
+            print("Student deleted successfully")
+            return
+
+    print("Student not found!")
+
+
+def average_marks():
+    if not students:
+        print("No students registered.")
+        return
+
+    total=sum(student["marks"] for student in students)
+    average=total/len(students)
+    print("Average marks:",average)
+
+
+def highest_scorer():
+    if not students:
+        print("No students registered.")
+        return
+
+    highest=max(students, key=lambda student: student["marks"])
+
+    print("Highest-scoring student:",highest["name"])
+    print("Roll Number:",highest["roll_number"])
+    print("Marks:",highest["marks"])
+
+
+while True:
+    print("\n===== Student Management System =====")
+    print("1. Add Student")
+    print("2. View All Students")
+    print("3. Search Student")
+    print("4. Update Marks")
+    print("5. Delete Student")
+    print("6. Calculate Student Average")
+    print("7. Display Highest Scorer")
+    print("8. Exit")
+
+    choice=input("Enter your choice: ")
+
+    if choice=="1":
+        add_student()
+    elif choice=="2":
+        view_students()
+    elif choice=="3":
+        search_student()
+    elif choice=="4":
+        update_marks()
+    elif choice=="5":
+        delete_student()
+    elif choice=="6":
+        average_marks()
+    elif choice=="7":
+        highest_scorer()
+    elif choice=="8":
+        print("Exiting application. Goodbye!")
+        break
+    else:
+        print("Invalid choice. Try again.")
