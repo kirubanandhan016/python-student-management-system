@@ -1,33 +1,48 @@
 # Student Management System
 
-A menu-driven Python CLI for managing student records and calculating basic academic statistics. This is a beginner project demonstrating Python fundamentals; it does not yet use a database or expose a REST API.
+A menu-driven Python command-line application for managing a small set of student records and calculating basic academic statistics. This is a Python fundamentals project; it does not currently use a database or expose a REST API.
 
-## Features
+## Implemented features
 
-- Add, view, search, update, and delete student records
-- Validate marks within the 0–100 range
-- Prevent duplicate names and roll numbers (as implemented)
-- Calculate average marks and identify the highest scorer
+- Add a student with name, section, roll number, and marks
+- List all student records
+- Search for a student by roll number
+- Update a student's marks
+- Delete a student by roll number
+- Calculate the average marks
+- Display the highest-scoring student
+- Validate marks to the range 0–100
 
-## Tech stack
+## Technology
 
-Python 3 · Standard library · Command-line interface
+Python 3 · Python standard library · Command-line interface
 
 ## Run locally
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/kirubanandhan016/python-student-management-system.git
 cd python-student-management-system
-python student_management.py
 ```
 
-On Windows, `py student_management.py` can be used if the Python launcher is installed.
+Run the actual entry-point file:
 
-## How data is stored
+```bash
+python main.py
+```
 
-The application keeps records in memory using Python collections. Records are lost when the program exits; persistent storage is not currently included.
+On Windows, the Python launcher can also be used:
 
-## Example student record
+```powershell
+py main.py
+```
+
+## Data storage
+
+Student records are stored in the in-memory `students` list in `main.py`. Data is not persisted when the program exits.
+
+## Example record structure
 
 ```python
 {
@@ -40,23 +55,28 @@ The application keeps records in memory using Python collections. Records are lo
 
 ## Concepts demonstrated
 
-- Variables, collections, loops, and conditionals
-- Functions and modular program flow
-- CRUD operations on in-memory records
-- Input validation and basic aggregation
-- Git and README documentation
+- Python lists and dictionaries
+- Functions, loops, and conditional statements
+- CRUD-style operations on in-memory records
+- Basic validation and aggregation
+- Finding minimum/maximum values in a collection
+
+## Known limitations
+
+- Non-numeric mark input can raise a `ValueError`; robust input recovery is a useful next improvement.
+- Records are not persisted to disk or a database.
+- Automated tests are not currently included.
 
 ## Future improvements
 
-- Persist records in SQLite or JSON
-- Add tests for validation and CRUD behavior
-- Handle invalid numeric input consistently
-- Extend the project into a FastAPI service
-
-## Project scope
-
-This is a learning project, not a production student information system. The repository's code is the source of truth for implemented behavior; run it locally to verify current functionality.
+- Add consistent handling for invalid numeric input.
+- Persist records using SQLite.
+- Add Pytest coverage for CRUD operations and validation.
+- Build a FastAPI version with Pydantic schemas and database persistence.
 
 ## Author
 
-**Kirubanandhan V** · [GitHub](https://github.com/kirubanandhan016) · [Portfolio](https://kirubanandhan016.github.io/) · [LinkedIn](https://www.linkedin.com/in/kirubanandhan-v-98bb83443/)
+**Kirubanandhan V**
+
+- GitHub: [@kirubanandhan016](https://github.com/kirubanandhan016)
+- Portfolio: [kirubanandhan016.github.io](https://kirubanandhan016.github.io/)
