@@ -18,10 +18,10 @@ Python 3 · Standard library · Command-line interface
 ```bash
 git clone https://github.com/kirubanandhan016/python-student-management-system.git
 cd python-student-management-system
-python student_management.py
+python main.py
 ```
 
-On Windows, `py student_management.py` can be used if the Python launcher is installed.
+On Windows, `py main.py` can be used if the Python launcher is installed.
 
 ## How data is stored
 
