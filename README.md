@@ -60,3 +60,26 @@ This is a learning project, not a production student information system. The rep
 ## Author
 
 **Kirubanandhan V** · [GitHub](https://github.com/kirubanandhan016) · [Portfolio](https://kirubanandhan016.github.io/) · [LinkedIn](https://www.linkedin.com/in/kirubanandhan-v-98bb83443/)
+
+
+## Application flow
+
+```mermaid
+flowchart TD
+    Start([Start]) --> Menu[Display menu]
+    Menu --> Choice{User choice}
+    Choice -->|Add| Add[Validate and add student]
+    Choice -->|View or search| Read[Read in-memory records]
+    Choice -->|Update or delete| Modify[Find and modify record]
+    Choice -->|Statistics| Stats[Calculate average and highest score]
+    Add --> Menu
+    Read --> Menu
+    Modify --> Menu
+    Stats --> Menu
+    Choice -->|Exit| End([Exit])
+```
+
+## Verification status
+
+No automated test suite is currently documented in this repository. Manually verify valid and invalid marks, duplicate roll numbers, unknown student lookups, update/delete behavior, and empty-list statistics after changes.
+
