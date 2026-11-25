@@ -1,4 +1,6 @@
-students=[]
+students = []
+
+
 def add_student():
     name=input("Enter the student name:")
     section=input("Enter the section and class:")
@@ -14,7 +16,12 @@ def add_student():
             return
 
     # Now allocate marks (0 to 100)
-    marks=float(input("Enter the marks 0->100: "))
+    try:
+        marks = float(input("Enter the marks 0->100: "))
+    except ValueError:
+        print("Marks must be a valid number.")
+        return
+
     if marks < 0 or marks > 100:
         print("Marks should be 0 to 100!")
         return
@@ -60,7 +67,11 @@ def update_marks():
 
     for student in students:
         if student["roll_number"]==roll_no:
-            marks=float(input("Enter the marks:"))
+            try:
+                marks = float(input("Enter the marks:"))
+            except ValueError:
+                print("Marks must be a valid number.")
+                return
 
             if marks < 0 or marks > 100:
                 print("Mark should be 0 to 100")
@@ -107,35 +118,41 @@ def highest_scorer():
     print("Marks:",highest["marks"])
 
 
-while True:
-    print("\n===== Student Management System =====")
-    print("1. Add Student")
-    print("2. View All Students")
-    print("3. Search Student")
-    print("4. Update Marks")
-    print("5. Delete Student")
-    print("6. Calculate Student Average")
-    print("7. Display Highest Scorer")
-    print("8. Exit")
+def main():
+    while True:
+        print("\n===== Student Management System =====")
+        print("1. Add Student")
+        print("2. View All Students")
+        print("3. Search Student")
+        print("4. Update Marks")
+        print("5. Delete Student")
+        print("6. Calculate Student Average")
+        print("7. Display Highest Scorer")
+        print("8. Exit")
+    
+        choice=input("Enter your choice: ")
+    
+        if choice=="1":
+            add_student()
+        elif choice=="2":
+            view_students()
+        elif choice=="3":
+            search_student()
+        elif choice=="4":
+            update_marks()
+        elif choice=="5":
+            delete_student()
+        elif choice=="6":
+            average_marks()
+        elif choice=="7":
+            highest_scorer()
+        elif choice=="8":
+            print("Exiting application. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Try again.")
+    
 
-    choice=input("Enter your choice: ")
 
-    if choice=="1":
-        add_student()
-    elif choice=="2":
-        view_students()
-    elif choice=="3":
-        search_student()
-    elif choice=="4":
-        update_marks()
-    elif choice=="5":
-        delete_student()
-    elif choice=="6":
-        average_marks()
-    elif choice=="7":
-        highest_scorer()
-    elif choice=="8":
-        print("Exiting application. Goodbye!")
-        break
-    else:
-        print("Invalid choice. Try again.")
+if __name__ == "__main__":
+    main()
